@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vocabulary_note/core/routing/app_router.dart';
+import 'package:vocabulary_note/core/routing/routes.dart';
 
 class VocabularyNoteApp extends StatelessWidget {
   const VocabularyNoteApp({super.key});
@@ -11,8 +13,11 @@ class VocabularyNoteApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return const MaterialApp(
+        return  MaterialApp(
           debugShowCheckedModeBanner: false,
+          onGenerateRoute: AppRouter().onGenerateRoute,
+          initialRoute: Routes.splashScreen,
+
         );
       },
     );

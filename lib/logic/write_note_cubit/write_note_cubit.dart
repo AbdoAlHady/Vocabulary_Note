@@ -8,7 +8,7 @@ class WriteNoteCubit extends Cubit<WriteNoteState> {
 
   bool isArabic = true;
   String text = '';
-  int colorCode = 0xFF4CAF50;
+  int colorCode = 0XFF4A47A3;
 
   void updateLanguage(bool isArabic) {
     this.isArabic = isArabic;

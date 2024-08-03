@@ -4,23 +4,25 @@ import 'package:vocabulary_note/core/theme/app_colors.dart';
 import 'package:vocabulary_note/core/theme/app_text_styles.dart';
 
 class AddNoteButton extends StatelessWidget {
-  const AddNoteButton({super.key, required this.colorCode});
+  const AddNoteButton({super.key, required this.colorCode, required this.onTap});
   final int colorCode;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    return  SizedBox(
+    return SizedBox(
       height: 40.h,
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(colorCode),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15)
-          )
+            backgroundColor: Color(colorCode),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15))),
+        onPressed:onTap,
+        child: Text(
+          'Done',
+          style:
+              AppTextStyles.font18DarkMedium.copyWith(color: AppColors.white),
         ),
-        onPressed: () {},
-        child:  Text('Done',style: AppTextStyles.font18DarkMedium.copyWith(color: AppColors.white),),
-      
       ),
     );
   }

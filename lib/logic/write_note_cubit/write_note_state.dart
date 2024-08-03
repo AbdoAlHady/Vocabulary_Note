@@ -13,5 +13,5 @@ class WriteNoteSuccessState extends WriteNoteState {
 class WriteNoteErrorState extends WriteNoteState {
   final String errorMessage;
 
-   WriteNoteErrorState(this.errorMessage);
+   WriteNoteErrorState({required this.errorMessage});
 }

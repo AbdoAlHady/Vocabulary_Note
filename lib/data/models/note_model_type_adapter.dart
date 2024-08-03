@@ -6,6 +6,7 @@ class NoteModelTypeAdapter extends TypeAdapter<NoteModel> {
   NoteModel read(BinaryReader reader) {
     return NoteModel(
       text: reader.readString(),
+      indexAddDataBase: reader.readInt(),
       colorCode: reader.readInt(),
       isArabic: reader.readBool(),
       similarArabicWords: reader.readStringList(),
@@ -20,6 +21,7 @@ class NoteModelTypeAdapter extends TypeAdapter<NoteModel> {
   @override
   void write(BinaryWriter writer, NoteModel obj) {
     writer.writeString(obj.text);
+    writer.writeInt(obj.indexAddDataBase);
     writer.writeInt(obj.colorCode);
     writer.writeBool(obj.isArabic);
     writer.writeStringList(obj.similarArabicWords);

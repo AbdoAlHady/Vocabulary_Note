@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vocabulary_note/core/theme/app_colors.dart';
 import 'package:vocabulary_note/helpers/spacing.dart';
+import 'package:vocabulary_note/ui/widgets/home/add_note/add_note_bottom_sheet.dart';
 import 'package:vocabulary_note/ui/widgets/home/home_app_bar.dart';
 
 import '../widgets/home/home_body.dart';
@@ -13,9 +15,22 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const HomeAppBar(),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primary,
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => const AddNoteBottomSheet(),
+          );
+        },
+        child: const Icon(
+          Icons.add,
+          color: AppColors.white,
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-        child:  CustomScrollView(
+        child: CustomScrollView(
           slivers: [
             const SliverToBoxAdapter(child: HomeFilter()),
             SliverToBoxAdapter(child: verticalSpace(10)),
@@ -26,3 +41,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+

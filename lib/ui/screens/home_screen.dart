@@ -22,6 +22,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: AppColors.primary,
         onPressed: () {
           showModalBottomSheet(
+            isScrollControlled: true,
             context: context,
             backgroundColor: context.isDark() ? AppColors.dark : AppColors.white,
             builder: (context) => BlocProvider(

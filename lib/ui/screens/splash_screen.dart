@@ -1,4 +1,3 @@
-
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:vocabulary_note/core/routing/routes.dart';
 import 'package:vocabulary_note/core/theme/app_colors.dart';
 import 'package:vocabulary_note/core/utis/app_images.dart';
+import 'package:vocabulary_note/core/utis/extensions.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +16,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-
   late AnimationController controller;
   late Animation<double> scaleAnimation;
   @override
@@ -30,20 +29,23 @@ class _SplashScreenState extends State<SplashScreen>
 
     controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Navigator.pushReplacementNamed(context, Routes.homeScreen);
+        Future.delayed(const Duration(seconds: 1), () {
+          context.pushNamedAndRemoveUntil(Routes.homeScreen);
+        });
       }
     });
     super.initState();
   }
+
   @override
   void dispose() {
-   controller.dispose();
+    controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.dark,
       body: AnimatedBackground(
         behaviour: RandomParticleBehaviour(
           options: const ParticleOptions(
@@ -66,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen>
                 width: 100.w,
                 height: 100.h,
                 color: AppColors.white,
-                ),
+              ),
             ),
           ),
         ),

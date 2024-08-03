@@ -18,8 +18,7 @@ class VocabularyNoteApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: AppRouter().onGenerateRoute,
           initialRoute: Routes.splashScreen,
-          theme: AppTheme.darkTheme,
-
+          theme: AppTheme.lightTheme,
         );
       },
     );

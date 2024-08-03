@@ -35,7 +35,7 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
         }
       },
       builder: (context, state) {
-        var cubit = WriteNoteCubit().get(context);
+        var cubit = context.read<WriteNoteCubit>();
         return AbsorbPointer(
           absorbing: state is WriteNoteLoadingState? true: false,
           child: Container(

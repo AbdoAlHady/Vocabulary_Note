@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vocabulary_note/data/models/note_model.dart';
-import 'package:vocabulary_note/helpers/hive_service.dart';
+import 'package:vocabulary_note/data/repos/note_repo.dart';
 import 'package:vocabulary_note/logic/write_note_cubit/write_note_state.dart';
 
 class WriteNoteCubit extends Cubit<WriteNoteState> {
-  WriteNoteCubit() : super(WriteNoteInitialState());
+  final NoteRepo _repo;
+  WriteNoteCubit(this._repo) : super(WriteNoteInitialState());
 
   WriteNoteCubit get(context) => BlocProvider.of<WriteNoteCubit>(context);
 
@@ -28,29 +28,17 @@ class WriteNoteCubit extends Cubit<WriteNoteState> {
     emit(WriteNoteInitialState());
   }
 
-  List<NoteModel> _getNotesFromDataBase() {
-    final box = HiveService().noteBox;
-    final notes = box!.values.toList();
-    return notes;
-  }
-
   Future<void> addNote() async {
     emit(WriteNoteLoadingState());
     try {
-      final notesList = _getNotesFromDataBase();
-      final box = HiveService().noteBox;
-      final noteModel = NoteModel(
-        text: text,
-        colorCode: colorCode,
-        isArabic: isArabic,
-        indexAddDataBase: notesList.length,
-      );
-      await box!.add(noteModel);
+      _repo.addNoteToDatabase(
+          isArabic: isArabic, text: text, colorCode: colorCode);
       emit(WriteNoteSuccessState());
       debugPrint('======== Added Note Successfully =========');
     } catch (e) {
       debugPrint('======== Added Note Failed : $e =========');
-      emit(WriteNoteErrorState(errorMessage: "something went wrong , please try again later"));
+      emit(WriteNoteErrorState(
+          errorMessage: "something went wrong , please try again later"));
     }
   }
 }

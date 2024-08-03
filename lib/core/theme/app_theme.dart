@@ -5,10 +5,11 @@ abstract class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.white,
-    fontFamily: 'Poppins' ,
+    fontFamily: 'Poppins',
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.white,
       elevation: 0,
+      surfaceTintColor: Colors.transparent,
       iconTheme: IconThemeData(color: AppColors.dark),
     ),
   );
@@ -16,10 +17,11 @@ abstract class AppTheme {
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.dark,
-    fontFamily: 'Poppins' ,
-     appBarTheme: const AppBarTheme(
+    fontFamily: 'Poppins',
+    appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.dark,
       elevation: 0,
+      surfaceTintColor: Colors.transparent,
       iconTheme: IconThemeData(color: AppColors.white),
     ),
   );

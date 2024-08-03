@@ -3,6 +3,7 @@ import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:vocabulary_note/core/routing/routes.dart';
 import 'package:vocabulary_note/core/theme/app_colors.dart';
 import 'package:vocabulary_note/core/utis/app_images.dart';
 
@@ -26,6 +27,12 @@ class _SplashScreenState extends State<SplashScreen>
     );
     scaleAnimation = Tween<double>(begin: 0, end: 1).animate(controller);
     controller.forward();
+
+    controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        Navigator.pushReplacementNamed(context, Routes.homeScreen);
+      }
+    });
     super.initState();
   }
   @override

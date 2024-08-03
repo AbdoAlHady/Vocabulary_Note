@@ -14,14 +14,15 @@ class AddNoteBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<WriteNoteCubit, WriteNoteState>(
       builder: (context, state) {
+        var cubit= WriteNoteCubit().get(context);
         return Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-          child: const Column(
+          child:  Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              ChoseLanguageType(isArabic: true, colorCode: 0xFF4CAF50),
+              ChoseLanguageType(isArabic: cubit.isArabic, colorCode: cubit.colorCode),
             ],
           ),
         );

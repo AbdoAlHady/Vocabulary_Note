@@ -2,7 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vocabulary_note/logic/write_note_cubit/write_note_state.dart';
 
 class WriteNoteCubit extends Cubit<WriteNoteState> {
-  WriteNoteCubit() : super(const WriteNoteInitialState());
+  WriteNoteCubit() : super( WriteNoteInitialState());
+
+  WriteNoteCubit get(context) => BlocProvider.of<WriteNoteCubit>(context);
 
   bool isArabic = true;
   String text = '';
@@ -10,16 +12,16 @@ class WriteNoteCubit extends Cubit<WriteNoteState> {
 
   void updateLanguage(bool isArabic) {
     this.isArabic = isArabic;
-    emit(const WriteNoteInitialState());
+    emit( WriteNoteInitialState());
   }
 
   void updateText(String text) {
     this.text = text;
-    emit(const WriteNoteInitialState());
+    emit( WriteNoteInitialState());
   }
 
   void updateColor(int colorCode) {
     this.colorCode = colorCode;
-    emit(const WriteNoteInitialState());
+    emit( WriteNoteInitialState());
   }
 }

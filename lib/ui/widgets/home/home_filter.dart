@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vocabulary_note/core/theme/app_colors.dart';
+import 'package:vocabulary_note/core/utis/extensions.dart';
 
 import '../../../core/theme/app_text_styles.dart';
 
@@ -7,15 +9,14 @@ class HomeFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return Row(
       children: [
-        Text(
-          'All Languages',
-          style: AppTextStyles.font18DarkBold,
-        ),
+        Text('All Languages',
+            style: AppTextStyles.font18DarkBold.copyWith(
+                color: context.isDark() ? AppColors.white : AppColors.dark)),
         const Spacer(),
         IconButton(
-          icon:  const Icon(
+          icon: const Icon(
             Icons.filter_list,
             size: 35,
           ),

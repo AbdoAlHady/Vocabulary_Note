@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vocabulary_note/core/theme/app_colors.dart';
+import 'package:vocabulary_note/core/utis/extensions.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
@@ -15,7 +16,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: TextStyle(
             fontSize: 18.sp,
             fontWeight: FontWeight.w600,
-            color: Colors.black),
+            color: context.isDark()?AppColors.white :AppColors.dark),
         child: AnimatedTextKit(
           repeatForever: true,
           pause: const Duration(seconds: 2),

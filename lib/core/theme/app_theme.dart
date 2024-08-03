@@ -6,11 +6,21 @@ abstract class AppTheme {
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.white,
     fontFamily: 'Poppins' ,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.white,
+      elevation: 0,
+      iconTheme: IconThemeData(color: AppColors.dark),
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.dark,
     fontFamily: 'Poppins' ,
+     appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.dark,
+      elevation: 0,
+      iconTheme: IconThemeData(color: AppColors.white),
+    ),
   );
 }

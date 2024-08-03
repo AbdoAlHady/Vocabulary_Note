@@ -1,26 +1,25 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vocabulary_note/core/enums/enums.dart';
 import 'package:vocabulary_note/logic/write_note_cubit/write_note_state.dart';
 
 class WriteNoteCubit extends Cubit<WriteNoteState> {
-  WriteNoteCubit():super(const WriteNoteInitialState());
-  LanguageFilter languageFilter = LanguageFilter.all;
-  SortedBy sortedBy = SortedBy.time;
-  SortType sortType = SortType.ascending;
+  WriteNoteCubit() : super(const WriteNoteInitialState());
 
-  void updateLanguageFilter(LanguageFilter filter) {
-    languageFilter = filter;
-    emit(const WriteNoteInitialState());
+  bool isArabic = true;
+  String text = '';
+  int colorCode = 0xFF4CAF50;
 
-  }
-
-  void updateSortedBy(SortedBy sortedBy) {
-    this.sortedBy = sortedBy;
+  void updateLanguage(bool isArabic) {
+    this.isArabic = isArabic;
     emit(const WriteNoteInitialState());
   }
 
-  void updateSortType(SortType sortType) {
-    this.sortType = sortType;
+  void updateText(String text) {
+    this.text = text;
+    emit(const WriteNoteInitialState());
+  }
+
+  void updateColor(int colorCode) {
+    this.colorCode = colorCode;
     emit(const WriteNoteInitialState());
   }
 }

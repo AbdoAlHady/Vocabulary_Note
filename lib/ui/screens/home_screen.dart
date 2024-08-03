@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vocabulary_note/core/theme/app_colors.dart';
 import 'package:vocabulary_note/helpers/spacing.dart';
+import 'package:vocabulary_note/logic/write_note_cubit/write_note_cubit.dart';
 import 'package:vocabulary_note/ui/widgets/home/add_note/add_note_bottom_sheet.dart';
 import 'package:vocabulary_note/ui/widgets/home/home_app_bar.dart';
 
@@ -20,7 +22,10 @@ class HomeScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => const AddNoteBottomSheet(),
+            builder: (context) => BlocProvider(
+              create: (context) => WriteNoteCubit(),
+              child: const AddNoteBottomSheet(),
+            ),
           );
         },
         child: const Icon(
@@ -41,4 +46,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

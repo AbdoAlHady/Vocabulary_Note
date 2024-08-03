@@ -15,9 +15,7 @@ class WriteNoteSuccessState extends WriteNoteState {
 }
 
 class WriteNoteErrorState extends WriteNoteState {
-  final String message;
+  final String errorMessage;
 
-  const WriteNoteErrorState(this.message);
+  const WriteNoteErrorState(this.errorMessage);
 }
-
-

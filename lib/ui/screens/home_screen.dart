@@ -18,44 +18,41 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ReadNoteCubit(getIt())..getNotesFromDatabase(),
-      child: Builder(builder: (context) {
-        return Scaffold(
-          appBar: const HomeAppBar(),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: AppColors.primary,
-            onPressed: () {
-              showModalBottomSheet(
-                isScrollControlled: true,
-                context: context,
-                backgroundColor:
-                    context.isDark() ? AppColors.dark : AppColors.white,
-                builder: (context) => BlocProvider(
-                  create: (_) => WriteNoteCubit(getIt()),
-                  child: const AddNoteBottomSheet(),
-                ),
-              ).whenComplete(() {
-                context.read<ReadNoteCubit>().getNotesFromDatabase();
-              });
-            },
-            child: const Icon(
-              Icons.add,
-              color: AppColors.white,
-            ),
+    return Builder(builder: (context) {
+      return Scaffold(
+        appBar: const HomeAppBar(),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: AppColors.primary,
+          onPressed: () {
+            showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              backgroundColor:
+                  context.isDark() ? AppColors.dark : AppColors.white,
+              builder: (context) => BlocProvider(
+                create: (_) => WriteNoteCubit(getIt()),
+                child: const AddNoteBottomSheet(),
+              ),
+            ).whenComplete(() {
+              context.read<ReadNoteCubit>().getNotesFromDatabase();
+            });
+          },
+          child: const Icon(
+            Icons.add,
+            color: AppColors.white,
           ),
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-            child: CustomScrollView(
-              slivers: [
-                const SliverToBoxAdapter(child: HomeFilter()),
-                SliverToBoxAdapter(child: verticalSpace(10)),
-                const HomeBody(),
-              ],
-            ),
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+          child: CustomScrollView(
+            slivers: [
+              const SliverToBoxAdapter(child: HomeFilter()),
+              SliverToBoxAdapter(child: verticalSpace(10)),
+              const HomeBody(),
+            ],
           ),
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vocabulary_note/core/theme/app_colors.dart';
-import 'package:vocabulary_note/core/utis/extensions.dart';
 
-import '../../../core/theme/app_text_styles.dart';
+import 'package:vocabulary_note/ui/widgets/home/filter_dialog/filters_dialog.dart';
+import 'package:vocabulary_note/ui/widgets/home/filter_text_widget.dart';
 
 class HomeFilter extends StatelessWidget {
   const HomeFilter({super.key});
@@ -11,18 +10,26 @@ class HomeFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text('All Languages',
-            style: AppTextStyles.font18DarkBold.copyWith(
-                color: context.isDark() ? AppColors.white : AppColors.dark)),
+        const FilterTextWidget(),
         const Spacer(),
-        IconButton(
-          icon: const Icon(
-            Icons.filter_list,
-            size: 35,
-          ),
-          onPressed: () {},
+        Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.filter_list,
+                size: 35,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const FiltersDialog(),
+                );
+              },
+            );
+          }
         ),
       ],
     );
   }
 }
+

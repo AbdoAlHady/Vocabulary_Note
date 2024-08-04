@@ -23,11 +23,11 @@ class NoteRepo {
   }
 
   // Get the note from the database by index
-  List<NoteModel> getAllNoteFromDatabase(
+  Future<List<NoteModel>> getAllNoteFromDatabase(
       {required LanguageFilter languageFilter,
       required SortedBy sortedBy,
-      required SortType sortType}) {
-    final noteList = noteBox!.values.toList();
+      required SortType sortType}) async {
+    final noteList = getNotesFromDatabase;
     _removeUnWantedWords(noteList, languageFilter);
     _applySorting(noteList, sortedBy, sortType);
     return noteList;
@@ -39,12 +39,13 @@ class NoteRepo {
       return;
     }
 
-    for (var note in noteList) {
+    for (var i = 0; i < noteList.length; i++) {
       if (languageFilter == LanguageFilter.arabicOnly &&
-              note.isArabic == false ||
+              noteList[i].isArabic == false ||
           languageFilter == LanguageFilter.englishOnly &&
-              note.isArabic == true) {
-        noteList.remove(note);
+              noteList[i].isArabic == true) {
+        noteList.removeAt(i);
+        i--;
       }
     }
   }
@@ -56,9 +57,9 @@ class NoteRepo {
         return;
       }
       _reverseList(noteList);
-    }else{
-      noteList.sort((a,b)=>a.text.length.compareTo(b.text.length));
-      if(sortType == SortType.ascending){
+    } else {
+      noteList.sort((a, b) => a.text.length.compareTo(b.text.length));
+      if (sortType == SortType.ascending) {
         return;
       }
       _reverseList(noteList);
@@ -66,10 +67,10 @@ class NoteRepo {
   }
 
   _reverseList(List<NoteModel> noteList) {
-   for(int i = 0; i < noteList.length ~/ 2; i++) {
-     final temp = noteList[i];
-     noteList[i] = noteList[noteList.length - i - 1];
-     noteList[noteList.length - i - 1] = temp;
-   }
+    for (int i = 0; i < noteList.length ~/ 2; i++) {
+      final temp = noteList[i];
+      noteList[i] = noteList[noteList.length - i - 1];
+      noteList[noteList.length - i - 1] = temp;
+    }
   }
 }

@@ -1,9 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vocabulary_note/core/enums/enums.dart';
-import 'package:vocabulary_note/data/models/note_model.dart';
 import 'package:vocabulary_note/data/repos/note_repo.dart';
-import 'package:vocabulary_note/helpers/hive_service.dart';
 import 'package:vocabulary_note/logic/read_note_cubit/read_note_state.dart';
 
 class ReadNoteCubit extends Cubit<ReadNoteState> {
@@ -17,22 +15,25 @@ class ReadNoteCubit extends Cubit<ReadNoteState> {
   void setLanguageFilter(LanguageFilter languageFilter) {
     this.languageFilter = languageFilter;
     emit(ReadNoteInitial());
+    getNotesFromDatabase();
   }
 
   void setSortedBy(SortedBy sortedBy) {
     this.sortedBy = sortedBy;
     emit(ReadNoteInitial());
+    getNotesFromDatabase();
   }
 
   void setSortType(SortType sortType) {
     this.sortType = sortType;
     emit(ReadNoteInitial());
+    getNotesFromDatabase();
   }
 
   void getNotesFromDatabase() async {
     emit(ReadNoteLoadingState());
     try {
-      final noteList = _repo.getAllNoteFromDatabase(
+      final noteList = await _repo.getAllNoteFromDatabase(
           languageFilter: languageFilter,
           sortedBy: sortedBy,
           sortType: sortType);

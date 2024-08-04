@@ -116,4 +116,14 @@ class NoteRepo {
       noteModel.save();
     }
   }
+
+  void deleteExample(NoteModel noteModel, String text, bool isArabic) {
+    if (isArabic) {
+      noteModel.arabicExample.remove(text);
+      noteModel.save();
+    }else{
+      noteModel.englishExample.remove(text);
+      noteModel.save();
+    }
+  }
 }

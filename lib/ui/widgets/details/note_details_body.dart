@@ -90,14 +90,26 @@ class NoteDetailsBody extends StatelessWidget {
             verticalSpace(10),
             for (var arabicExamples in noteModel.arabicExample)
               WordInfoWidget(
-                  label: arabicExamples,
-                  colorCode: noteModel.colorCode,
-                  isArabic: true),
+                label: arabicExamples,
+                colorCode: noteModel.colorCode,
+                isArabic: true,
+                onTap: () {
+                  context
+                      .read<WriteNoteCubit>()
+                      .deleteExample(noteModel, arabicExamples, true);
+                },
+              ),
             for (var englishExamples in noteModel.englishExample)
               WordInfoWidget(
-                  label: englishExamples,
-                  colorCode: noteModel.colorCode,
-                  isArabic: false),
+                label: englishExamples,
+                colorCode: noteModel.colorCode,
+                isArabic: false,
+                onTap: () {
+                  context
+                      .read<WriteNoteCubit>()
+                      .deleteExample(noteModel, englishExamples, false);
+                },
+              ),
           ],
         );
       },

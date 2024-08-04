@@ -86,6 +86,8 @@ class WriteNoteCubit extends Cubit<WriteNoteState> {
 
   }
 
+
+
   void addExample(NoteModel noteModel) {
     emit(WriteNoteLoadingState());
     try {
@@ -94,6 +96,19 @@ class WriteNoteCubit extends Cubit<WriteNoteState> {
       debugPrint('======== Added Example Successfully =========');
     } catch (e) {
       debugPrint('======== Added Example Failed : $e =========');
+      emit(WriteNoteErrorState(
+          errorMessage: "something went wrong , please try again later"));
+    }
+  }
+
+  void deleteExample(NoteModel noteModel, String word, bool isArabic) {
+    emit(WriteNoteLoadingState());
+    try {
+      _repo.deleteExample(noteModel, word, isArabic);
+      emit(DeleteSimilarWordOrExampleSuccessState());
+      debugPrint('======== Deleted Example Successfully =========');
+    } catch (e) {
+      debugPrint('======== Deleted Example Failed : $e =========');
       emit(WriteNoteErrorState(
           errorMessage: "something went wrong , please try again later"));
     }

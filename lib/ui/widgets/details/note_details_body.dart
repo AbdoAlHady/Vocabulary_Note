@@ -11,6 +11,8 @@ import 'package:vocabulary_note/logic/write_note_cubit/write_note_cubit.dart';
 import 'package:vocabulary_note/logic/write_note_cubit/write_note_state.dart';
 import 'package:vocabulary_note/ui/widgets/details/word_info_widget.dart';
 
+import 'add_new_examples_or_similar_word_bottom_sheet.dart';
+
 class NoteDetailsBody extends StatelessWidget {
   const NoteDetailsBody({super.key, required this.noteModel});
   final NoteModel noteModel;
@@ -33,13 +35,34 @@ class NoteDetailsBody extends StatelessWidget {
               label: 'Word',
             ),
             verticalSpace(10),
-            WordInfoWidget(noteModel: noteModel),
+            WordInfoWidget(
+                label: noteModel.text,
+                colorCode: noteModel.colorCode,
+                isArabic: noteModel.isArabic),
             verticalSpace(20),
             TitleHeading(
               colorCode: noteModel.colorCode,
               label: 'Similar Words',
-              onTap: () {},
+              onTap: () {
+                showModalBottomSheet(
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) =>
+                        AddNewExamplesOrSimilarWordBottomSheet(
+                            isExample: false, noteModel: noteModel));
+              },
             ),
+            verticalSpace(10),
+            for (var similarWord in noteModel.similarArabicWords)
+              WordInfoWidget(
+                  label: similarWord,
+                  colorCode: noteModel.colorCode,
+                  isArabic: true),
+            for (var similarWord in noteModel.similarEnglishWords)
+              WordInfoWidget(
+                  label: similarWord,
+                  colorCode: noteModel.colorCode,
+                  isArabic: false),
             verticalSpace(20),
             TitleHeading(
               colorCode: noteModel.colorCode,

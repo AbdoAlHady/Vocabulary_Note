@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vocabulary_note/core/theme/app_colors.dart';
 import 'package:vocabulary_note/core/theme/app_text_styles.dart';
 
-class AddNoteButton extends StatelessWidget {
-  const AddNoteButton({super.key, required this.colorCode, required this.onTap});
+class DoneButton extends StatelessWidget {
+  const DoneButton({super.key, required this.colorCode, required this.onTap});
   final int colorCode;
   final VoidCallback onTap;
   @override

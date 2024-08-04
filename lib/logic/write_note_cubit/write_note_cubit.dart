@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vocabulary_note/data/models/note_model.dart';
 import 'package:vocabulary_note/data/repos/note_repo.dart';
 import 'package:vocabulary_note/logic/write_note_cubit/write_note_state.dart';
 
@@ -32,7 +33,10 @@ class WriteNoteCubit extends Cubit<WriteNoteState> {
     emit(WriteNoteLoadingState());
     try {
       _repo.addNoteToDatabase(
-          isArabic: isArabic, text: text, colorCode: colorCode, );
+        isArabic: isArabic,
+        text: text,
+        colorCode: colorCode,
+      );
       emit(WriteNoteSuccessState());
       debugPrint('======== Added Note Successfully =========');
     } catch (e) {
@@ -41,7 +45,8 @@ class WriteNoteCubit extends Cubit<WriteNoteState> {
           errorMessage: "something went wrong , please try again later"));
     }
   }
-  void deleteNoteFormDatabase(int indexAtDatabase)async{
+
+  void deleteNoteFormDatabase(int indexAtDatabase) async {
     emit(WriteNoteLoadingState());
     try {
       _repo.deleteNoteFromDatabase(indexAtDatabase);
@@ -49,6 +54,19 @@ class WriteNoteCubit extends Cubit<WriteNoteState> {
       debugPrint('======== Deleted Note Successfully =========');
     } catch (e) {
       debugPrint('======== Deleted Note Failed : $e =========');
+      emit(WriteNoteErrorState(
+          errorMessage: "something went wrong , please try again later"));
+    }
+  }
+
+  void addSimilarWord(NoteModel noteModel) {
+    emit(WriteNoteLoadingState());
+    try {
+      _repo.addSimilarWord(noteModel, text, isArabic);
+      emit(AddSimilarWordOrExampleSuccessState());
+      debugPrint('======== Added Similar Word Successfully =========');
+    } catch (e) {
+      debugPrint('======== Added Similar Word Failed : $e =========');
       emit(WriteNoteErrorState(
           errorMessage: "something went wrong , please try again later"));
     }

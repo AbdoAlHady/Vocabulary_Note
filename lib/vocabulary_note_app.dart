@@ -6,6 +6,7 @@ import 'package:vocabulary_note/core/routing/app_router.dart';
 import 'package:vocabulary_note/core/routing/routes.dart';
 import 'package:vocabulary_note/core/theme/app_theme.dart';
 import 'package:vocabulary_note/logic/read_note_cubit/read_note_cubit.dart';
+import 'package:vocabulary_note/logic/write_note_cubit/write_note_cubit.dart';
 
 class VocabularyNoteApp extends StatelessWidget {
   const VocabularyNoteApp({super.key});
@@ -17,8 +18,12 @@ class VocabularyNoteApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return BlocProvider(
-          create: (context) => ReadNoteCubit(getIt())..getNotesFromDatabase(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => WriteNoteCubit(getIt())),
+            BlocProvider(create:  (context) => ReadNoteCubit(getIt())..getNotesFromDatabase())
+          ],
+          
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             onGenerateRoute: AppRouter().onGenerateRoute,

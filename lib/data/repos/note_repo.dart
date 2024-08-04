@@ -34,7 +34,6 @@ class NoteRepo {
     int indexAtDatabase =
         noteList.indexWhere((element) => element.indexAddDataBase == index);
     await noteBox!.delete(noteList[indexAtDatabase].key);
-    
   }
 
   // Get the note from the database by index
@@ -86,6 +85,16 @@ class NoteRepo {
       final temp = noteList[i];
       noteList[i] = noteList[noteList.length - i - 1];
       noteList[noteList.length - i - 1] = temp;
+    }
+  }
+
+  void addSimilarWord(NoteModel noteModel, String text, bool isArabic) {
+    if (isArabic) {
+      noteModel.similarArabicWords.add(text);
+      noteModel.save();
+    }else{
+      noteModel.similarEnglishWords.add(text);
+      noteModel.save();
     }
   }
 }

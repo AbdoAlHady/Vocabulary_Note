@@ -10,6 +10,9 @@ class WriteNoteLoadingState extends WriteNoteState {
 class WriteNoteSuccessState extends WriteNoteState {
 }
 
+class AddSimilarWordOrExampleSuccessState extends WriteNoteState {
+}
+
 class WriteNoteErrorState extends WriteNoteState {
   final String errorMessage;
 

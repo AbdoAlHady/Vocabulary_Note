@@ -77,7 +77,7 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
                         color: AppColors.primary,
                       ),
                     ),
-                  ) :AddNoteButton(
+                  ) :DoneButton(
                     colorCode: cubit.colorCode,
                     onTap: () async{
                       if (formKey.currentState!.validate()) {

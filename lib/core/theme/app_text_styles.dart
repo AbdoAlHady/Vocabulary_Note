@@ -4,8 +4,6 @@ import 'package:vocabulary_note/core/theme/app_colors.dart';
 
 abstract class AppTextStyles{
 
-
-
   static TextStyle font15WhiteBold= TextStyle(
     fontSize: 15.sp,
     fontWeight: FontWeight.w700,
@@ -13,13 +11,13 @@ abstract class AppTextStyles{
   );
   static  TextStyle font18DarkMedium= TextStyle(
     fontSize: 18.sp,
-    fontWeight: FontWeight.w100,
+    fontWeight: FontWeight.w500,
     color: AppColors.dark,
   );
 
   static  TextStyle font18DarkBold= TextStyle(
     fontSize: 18.sp,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
 

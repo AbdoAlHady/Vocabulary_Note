@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vocabulary_note/core/routing/routes.dart';
+import 'package:vocabulary_note/core/utis/extensions.dart';
 import 'package:vocabulary_note/logic/read_note_cubit/read_note_cubit.dart';
 import 'package:vocabulary_note/logic/read_note_cubit/read_note_state.dart';
 
@@ -63,26 +65,31 @@ class HomeBody extends StatelessWidget {
               ),
               itemCount: state.noteList.length,
               itemBuilder: (context, index) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color:  Color(state.noteList[index].colorCode),
-                    borderRadius: BorderRadius.circular(20),
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(state.noteList[index].colorCode).withOpacity(0.3),
-                         Color(state.noteList[index].colorCode)
-                      ],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
+                return GestureDetector(
+                  onTap: () {
+                  context.pushNamed(Routes.detailsScreen, arguments: state.noteList[index]);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color:  Color(state.noteList[index].colorCode),
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(state.noteList[index].colorCode).withOpacity(0.3),
+                           Color(state.noteList[index].colorCode)
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
                     ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      state.noteList[index].text,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
+                    child: Center(
+                      child: Text(
+                        state.noteList[index].text,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),

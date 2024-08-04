@@ -71,4 +71,17 @@ class WriteNoteCubit extends Cubit<WriteNoteState> {
           errorMessage: "something went wrong , please try again later"));
     }
   }
+
+  void addExample(NoteModel noteModel) {
+    emit(WriteNoteLoadingState());
+    try {
+      _repo.addExamples(noteModel, text, isArabic);
+      emit(AddSimilarWordOrExampleSuccessState());
+      debugPrint('======== Added Example Successfully =========');
+    } catch (e) {
+      debugPrint('======== Added Example Failed : $e =========');
+      emit(WriteNoteErrorState(
+          errorMessage: "something went wrong , please try again later"));
+    }
+  }
 }

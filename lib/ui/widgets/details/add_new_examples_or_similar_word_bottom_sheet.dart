@@ -66,7 +66,7 @@ class _AddNewExamplesOrSimilarWordBottomSheetState
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ChoseLanguageType(
-                      isArabic: cubit.isArabic, colorCode: cubit.colorCode),              
+                      isArabic: cubit.isArabic, colorCode: cubit.colorCode),
                   verticalSpace(15),
                   NoteTextField(
                     label:
@@ -88,7 +88,12 @@ class _AddNewExamplesOrSimilarWordBottomSheetState
                           colorCode: widget.noteModel.colorCode,
                           onTap: () async {
                             if (_formKey.currentState!.validate()) {
-                              cubit.addSimilarWord(widget.noteModel);
+                              if (widget.isExample) {
+                                cubit.addExample(widget.noteModel);
+                              }else{
+                                cubit.addSimilarWord(widget.noteModel);
+                              }
+                              
                             }
                           },
                         ),

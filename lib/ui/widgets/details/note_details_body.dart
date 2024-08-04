@@ -67,8 +67,26 @@ class NoteDetailsBody extends StatelessWidget {
             TitleHeading(
               colorCode: noteModel.colorCode,
               label: 'Examples',
-              onTap: () {},
+              onTap: () {
+                showModalBottomSheet(
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) =>
+                        AddNewExamplesOrSimilarWordBottomSheet(
+                            isExample: true, noteModel: noteModel));
+              },
             ),
+            verticalSpace(10),
+            for (var arabicExamples in noteModel.arabicExample)
+              WordInfoWidget(
+                  label: arabicExamples,
+                  colorCode: noteModel.colorCode,
+                  isArabic: true),
+            for (var englishExamples in noteModel.englishExample)
+              WordInfoWidget(
+                  label: englishExamples,
+                  colorCode: noteModel.colorCode,
+                  isArabic: false),
           ],
         );
       },

@@ -21,6 +21,10 @@ class NoteRepo {
     );
     noteBox!.add(note);
   }
+  // Delete the note from the database by index
+  Future<void> deleteNoteFromDatabase(int index) async{
+    await noteBox!.deleteAt(index);
+  }
 
   // Get the note from the database by index
   Future<List<NoteModel>> getAllNoteFromDatabase(

@@ -10,7 +10,6 @@ import 'package:vocabulary_note/logic/read_note_cubit/read_note_cubit.dart';
 import 'package:vocabulary_note/logic/write_note_cubit/write_note_cubit.dart';
 import 'package:vocabulary_note/logic/write_note_cubit/write_note_state.dart';
 import 'package:vocabulary_note/ui/widgets/details/word_info_widget.dart';
-
 import 'add_new_examples_or_similar_word_bottom_sheet.dart';
 
 class NoteDetailsBody extends StatelessWidget {
@@ -55,14 +54,26 @@ class NoteDetailsBody extends StatelessWidget {
             verticalSpace(10),
             for (var similarWord in noteModel.similarArabicWords)
               WordInfoWidget(
-                  label: similarWord,
-                  colorCode: noteModel.colorCode,
-                  isArabic: true),
+                label: similarWord,
+                colorCode: noteModel.colorCode,
+                isArabic: true,
+                onTap: () {
+                  context
+                      .read<WriteNoteCubit>()
+                      .deleteSimilarWord(noteModel, similarWord, true);
+                },
+              ),
             for (var similarWord in noteModel.similarEnglishWords)
               WordInfoWidget(
-                  label: similarWord,
-                  colorCode: noteModel.colorCode,
-                  isArabic: false),
+                label: similarWord,
+                colorCode: noteModel.colorCode,
+                isArabic: false,
+                onTap: () {
+                  context
+                      .read<WriteNoteCubit>()
+                      .deleteSimilarWord(noteModel, similarWord, false);
+                },
+              ),
             verticalSpace(20),
             TitleHeading(
               colorCode: noteModel.colorCode,

@@ -72,6 +72,20 @@ class WriteNoteCubit extends Cubit<WriteNoteState> {
     }
   }
 
+  void deleteSimilarWord(NoteModel noteModel, String word, bool isArabic) {
+    emit(WriteNoteLoadingState());
+    try {
+      _repo.deleteSimilarWord(noteModel, word, isArabic);
+      emit(DeleteSimilarWordOrExampleSuccessState());
+      debugPrint('======== Deleted Similar Word Successfully =========');
+    } catch (e) {
+      debugPrint('======== Deleted Similar Word Failed : $e =========');
+      emit(WriteNoteErrorState(
+          errorMessage: "something went wrong , please try again later"));
+    }
+
+  }
+
   void addExample(NoteModel noteModel) {
     emit(WriteNoteLoadingState());
     try {

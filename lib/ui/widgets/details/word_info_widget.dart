@@ -8,12 +8,13 @@ class WordInfoWidget extends StatelessWidget {
   const WordInfoWidget({
     super.key,
     required this.label,
-    required this.colorCode, required this.isArabic,
+    required this.colorCode, required this.isArabic, this.onTap,
   });
 
   final String label;
   final int colorCode;
   final bool isArabic;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +35,18 @@ class WordInfoWidget extends StatelessWidget {
             style: TextStyle(color: Color(colorCode)),
           ),
         ),
+        trailing:onTap!=null? GestureDetector(
+          onTap: onTap,
+          child: Icon(Icons.delete, color: context.isDark()?AppColors.dark:AppColors.white,)):const SizedBox.shrink(),
         title: Text(
           label,
           style: AppTextStyles.font18DarkBold.copyWith(
               color: context.isDark() ? AppColors.dark : AppColors.white),
         ),
+
+        
       ),
+      
     );
   }
 }

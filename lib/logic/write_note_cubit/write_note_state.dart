@@ -12,6 +12,9 @@ class WriteNoteSuccessState extends WriteNoteState {
 
 class AddSimilarWordOrExampleSuccessState extends WriteNoteState {
 }
+class DeleteSimilarWordOrExampleSuccessState extends WriteNoteState {
+  
+}
 
 class WriteNoteErrorState extends WriteNoteState {
   final String errorMessage;

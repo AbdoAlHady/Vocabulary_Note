@@ -106,4 +106,14 @@ class NoteRepo {
       noteModel.save();
     }
   }
+
+  void deleteSimilarWord(NoteModel noteModel, String text, bool isArabic) {
+    if (isArabic) {
+      noteModel.similarArabicWords.remove(text);
+      noteModel.save();
+    }else{
+      noteModel.similarEnglishWords.remove(text);
+      noteModel.save();
+    }
+  }
 }

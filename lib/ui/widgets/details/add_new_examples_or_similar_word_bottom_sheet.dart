@@ -8,7 +8,6 @@ import 'package:vocabulary_note/helpers/spacing.dart';
 import 'package:vocabulary_note/logic/write_note_cubit/write_note_cubit.dart';
 import 'package:vocabulary_note/logic/write_note_cubit/write_note_state.dart';
 import 'package:vocabulary_note/ui/widgets/home/add_note/add_note_button.dart';
-import 'package:vocabulary_note/ui/widgets/home/add_note/choose_colors_widget.dart';
 import 'package:vocabulary_note/ui/widgets/home/add_note/note_text_field.dart';
 
 import '../home/add_note/chose_language_type.dart';
@@ -67,11 +66,7 @@ class _AddNewExamplesOrSimilarWordBottomSheetState
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ChoseLanguageType(
-                      isArabic: cubit.isArabic, colorCode: cubit.colorCode),
-                  verticalSpace(15),
-                  ChooseColorsWidget(
-                    activeColor: cubit.colorCode,
-                  ),
+                      isArabic: cubit.isArabic, colorCode: cubit.colorCode),              
                   verticalSpace(15),
                   NoteTextField(
                     label:

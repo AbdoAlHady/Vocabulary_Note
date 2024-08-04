@@ -97,4 +97,13 @@ class NoteRepo {
       noteModel.save();
     }
   }
+   void addExamples(NoteModel noteModel, String text, bool isArabic) {
+    if (isArabic) {
+      noteModel.arabicExample.add(text);
+      noteModel.save();
+    }else{
+      noteModel.englishExample.add(text);
+      noteModel.save();
+    }
+  }
 }

@@ -32,11 +32,23 @@ class WriteNoteCubit extends Cubit<WriteNoteState> {
     emit(WriteNoteLoadingState());
     try {
       _repo.addNoteToDatabase(
-          isArabic: isArabic, text: text, colorCode: colorCode);
+          isArabic: isArabic, text: text, colorCode: colorCode, );
       emit(WriteNoteSuccessState());
       debugPrint('======== Added Note Successfully =========');
     } catch (e) {
       debugPrint('======== Added Note Failed : $e =========');
+      emit(WriteNoteErrorState(
+          errorMessage: "something went wrong , please try again later"));
+    }
+  }
+  void deleteNoteFormDatabase(int indexAtDatabase)async{
+    emit(WriteNoteLoadingState());
+    try {
+      _repo.deleteNoteFromDatabase(indexAtDatabase);
+      emit(WriteNoteSuccessState());
+      debugPrint('======== Deleted Note Successfully =========');
+    } catch (e) {
+      debugPrint('======== Deleted Note Failed : $e =========');
       emit(WriteNoteErrorState(
           errorMessage: "something went wrong , please try again later"));
     }

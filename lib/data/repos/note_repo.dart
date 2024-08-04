@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:vocabulary_note/core/enums/enums.dart';
 import 'package:vocabulary_note/helpers/hive_service.dart';
 
@@ -8,6 +9,11 @@ class NoteRepo {
 
   List<NoteModel> get getNotesFromDatabase {
     final noteList = noteBox!.values.toList();
+    for (int i = 0; i < noteList.length; i++) {
+      debugPrint(
+          '==============${noteList[i].indexAddDataBase}================');
+    }
+
     return noteList;
   }
 
@@ -21,9 +27,14 @@ class NoteRepo {
     );
     noteBox!.add(note);
   }
+
   // Delete the note from the database by index
-  Future<void> deleteNoteFromDatabase(int index) async{
-    await noteBox!.deleteAt(index);
+  Future<void> deleteNoteFromDatabase(int index) async {
+    var noteList = getNotesFromDatabase;
+    int indexAtDatabase =
+        noteList.indexWhere((element) => element.indexAddDataBase == index);
+    await noteBox!.delete(noteList[indexAtDatabase].key);
+    
   }
 
   // Get the note from the database by index
@@ -31,7 +42,7 @@ class NoteRepo {
       {required LanguageFilter languageFilter,
       required SortedBy sortedBy,
       required SortType sortType}) async {
-    final noteList = getNotesFromDatabase;
+    var noteList = getNotesFromDatabase;
     _removeUnWantedWords(noteList, languageFilter);
     _applySorting(noteList, sortedBy, sortType);
     return noteList;

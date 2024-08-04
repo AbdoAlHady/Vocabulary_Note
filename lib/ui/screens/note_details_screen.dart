@@ -14,28 +14,34 @@ class NoteDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WriteNoteCubit(getIt()),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Details Screen'),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.delete,
-                color: AppColors.primary,
-              ),
-              onPressed: () {},
+      create: (_) => WriteNoteCubit(getIt()),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Details Screen'),
+              centerTitle: true,
+              actions: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.delete,
+                    color: AppColors.primary,
+                  ),
+                  onPressed: () {
+                    context.read<WriteNoteCubit>().deleteNoteFormDatabase(noteModel.indexAddDataBase);
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-        body: SingleChildScrollView(
-            child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-          child: NoteDetailsBody(
-            noteModel: noteModel,
-          ),
-        )),
+            body: SingleChildScrollView(
+                child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+              child: NoteDetailsBody(
+                noteModel: noteModel,
+              ),
+            )),
+          );
+        }
       ),
     );
   }

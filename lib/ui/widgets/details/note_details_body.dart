@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vocabulary_note/core/theme/app_colors.dart';
 import 'package:vocabulary_note/core/theme/app_text_styles.dart';
 import 'package:vocabulary_note/core/utis/extensions.dart';
 import 'package:vocabulary_note/data/models/note_model.dart';
 import 'package:vocabulary_note/helpers/spacing.dart';
+import 'package:vocabulary_note/logic/read_note_cubit/read_note_cubit.dart';
+import 'package:vocabulary_note/logic/write_note_cubit/write_note_cubit.dart';
+import 'package:vocabulary_note/logic/write_note_cubit/write_note_state.dart';
 import 'package:vocabulary_note/ui/widgets/details/word_info_widget.dart';
 
 class NoteDetailsBody extends StatelessWidget {
@@ -13,28 +17,38 @@ class NoteDetailsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TitleHeading(
-          colorCode: noteModel.colorCode,
-          label: 'Word',
-        ),
-        verticalSpace(10),
-        WordInfoWidget(noteModel: noteModel),
-        verticalSpace(20),
-        TitleHeading(
-          colorCode: noteModel.colorCode,
-          label: 'Similar Words',
-          onTap: () {},
-        ),
-        verticalSpace(20),
-        TitleHeading(
-          colorCode: noteModel.colorCode,
-          label: 'Examples',
-          onTap: () {},
-        ),
-      ],
+    return BlocConsumer<WriteNoteCubit, WriteNoteState>(
+      listener: (context, state) {
+        if (state is WriteNoteSuccessState) {
+          context.pop();
+          context.read<ReadNoteCubit>().getNotesFromDatabase();
+        }
+      },
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TitleHeading(
+              colorCode: noteModel.colorCode,
+              label: 'Word',
+            ),
+            verticalSpace(10),
+            WordInfoWidget(noteModel: noteModel),
+            verticalSpace(20),
+            TitleHeading(
+              colorCode: noteModel.colorCode,
+              label: 'Similar Words',
+              onTap: () {},
+            ),
+            verticalSpace(20),
+            TitleHeading(
+              colorCode: noteModel.colorCode,
+              label: 'Examples',
+              onTap: () {},
+            ),
+          ],
+        );
+      },
     );
   }
 }

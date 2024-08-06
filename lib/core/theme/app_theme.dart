@@ -6,6 +6,7 @@ abstract class AppTheme {
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.white,
     fontFamily: 'Poppins',
+    
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.white,
       elevation: 0,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vocabulary_note/core/theme/app_colors.dart';
 import 'package:vocabulary_note/core/utis/extensions.dart';
+import 'package:vocabulary_note/ui/widgets/home/change_theme_button.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
@@ -29,15 +30,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
       ),
-      actions: [
-        IconButton(
-          icon: const Icon(
-            Icons.dark_mode_outlined,
-            size: 35,
-            color: AppColors.primary,
-          ),
-          onPressed: () {},
-        ),
+      actions: const [
+        ChangeThemeButton(),
       ],
     );
   }
@@ -45,3 +39,5 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize =>  Size.fromHeight(50.h);
 }
+
+

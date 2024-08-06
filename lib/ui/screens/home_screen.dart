@@ -48,7 +48,10 @@ class HomeScreen extends StatelessWidget {
             slivers: [
               const SliverToBoxAdapter(child: HomeFilter()),
               SliverToBoxAdapter(child: verticalSpace(10)),
-              const HomeBody(),
+              const SliverFillRemaining(
+                hasScrollBody: true,
+                child: HomeBody(),
+              )
             ],
           ),
         ),

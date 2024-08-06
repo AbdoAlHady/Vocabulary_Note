@@ -66,7 +66,7 @@ class _AddNewExamplesOrSimilarWordBottomSheetState
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ChoseLanguageType(
-                      isArabic: cubit.isArabic, colorCode: cubit.colorCode),
+                      isArabic: cubit.isArabic, colorCode: widget.noteModel.colorCode),
                   verticalSpace(15),
                   NoteTextField(
                     label:

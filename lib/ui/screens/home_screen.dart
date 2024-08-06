@@ -20,6 +20,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: const HomeAppBar(),
         floatingActionButton: FloatingActionButton(
           backgroundColor: AppColors.primary,

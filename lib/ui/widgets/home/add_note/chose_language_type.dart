@@ -30,7 +30,8 @@ class ChoseLanguageType extends StatelessWidget {
       onTap: () {
        context.read<WriteNoteCubit>().updateLanguage(isArabicLanguage);
       },
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 1000),
           width: 55.w,
           height: 55.h,
           alignment: Alignment.center,

@@ -32,7 +32,9 @@ class ChooseColorsWidget extends StatelessWidget {
               onTap: () {
                 context.read<WriteNoteCubit>().updateColor(_colorCodes[index]);
               },
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(seconds: 1),
+                curve: Curves.easeIn,
                 width: 45.w,
                 height: 45.h,
                 decoration: BoxDecoration(

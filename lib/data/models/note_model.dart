@@ -5,19 +5,22 @@ class NoteModel extends HiveObject {
   final String text;
   final int colorCode;
   final bool isArabic;
-  final List<String> similarArabicWords;
-  final List<String> similarEnglishWords;
-  final List<String> arabicExample;
-  final List<String> englishExample;
+  List<String> similarArabicWords;
+  List<String> similarEnglishWords;
+  List<String> arabicExample;
+  List<String> englishExample;
 
   NoteModel({
     required this.indexAddDataBase,
     required this.text,
     required this.colorCode,
     required this.isArabic,
-    this.similarArabicWords = const [],
-    this.similarEnglishWords = const [],
-    this.arabicExample = const [],
-    this.englishExample = const [],
-  });
+    List<String>? similarArabicWords,
+    List<String>? similarEnglishWords,
+    List<String>? arabicExample,
+    List<String>? englishExample,
+  })  : similarArabicWords = similarArabicWords ?? [],
+        similarEnglishWords = similarEnglishWords ?? [],
+        arabicExample = arabicExample ?? [],
+        englishExample = englishExample ?? [];
 }

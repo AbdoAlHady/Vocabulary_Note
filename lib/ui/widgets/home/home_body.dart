@@ -50,6 +50,7 @@ class HomeBody extends StatelessWidget {
                 arguments: state.noteList[index]);
           },
           child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             decoration: BoxDecoration(
               color: Color(state.noteList[index].colorCode),
               borderRadius: BorderRadius.circular(20),
